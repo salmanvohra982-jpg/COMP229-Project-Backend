@@ -1,3 +1,10 @@
+/* 
+    File: server.js
+    Developers: Salman Vahora, Bat An Dinh, Artemis, Edgar, Sriraj Bura
+    Description: Entry for Help Desk backend (Part 2)
+    Date: November 09 2025
+*/
+
 var express = require('express');
 var cors = require('cors');
 var createError = require('http-errors');

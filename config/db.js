@@ -1,3 +1,10 @@
+/* 
+    File: db.js
+    Developers: Salman Vahora, Bat An Dinh, Artemis, Edgar, Sriraj Bura
+    Description: Connects to MongoDB Atlas and initializes database connection
+    Date: November 09 2025
+*/
+
 const mongoose = require('mongoose');
 require('dotenv').config();
 
