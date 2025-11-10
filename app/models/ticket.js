@@ -49,6 +49,10 @@ const ticketSchema = new Schema(
                 } 
             }
         ],
-});
+},
+{
+    collection: "tickets"
+}
+);
 
 module.exports = mongoose.model('Ticket', ticketSchema);
