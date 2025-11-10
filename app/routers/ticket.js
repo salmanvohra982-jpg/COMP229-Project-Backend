@@ -5,16 +5,16 @@
     Date: November 09 2025
 */
 
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const TicketController = require('../controllers/ticket');
+const { requireSignin } = require('../controllers/auth');
 
-var TicketController = require('../controllers/ticket');
-var authController = require('../controllers/auth');
-
-router.get('/', TicketController.list);
-router.post('/', authController.logtoken, authController.requireSignin, TicketController.create);
-router.get('/:id', TicketController.ticketById);
-router.put('/:id', authController.logtoken, authController.requireSignin, TicketController.update);
-router.delete('/:id', authController.logtoken, authController.requireSignin, TicketController.hasAuthorization, TicketController.cancel);
+// Ticket CRUD routes
+router.get('/', requireSignin, TicketController.list);
+router.post('/', requireSignin, TicketController.create);
+router.get('/:id', requireSignin, TicketController.ticketById);
+router.put('/:id', requireSignin, TicketController.update);
+router.delete('/:id', requireSignin, TicketController.cancel);
 
 module.exports = router;

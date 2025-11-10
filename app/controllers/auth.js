@@ -5,7 +5,7 @@
     Date: November 09 2025
 */
 
-const UserModel = require('../models/User');
+const UserModel = require('../models/user');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');

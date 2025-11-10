@@ -11,7 +11,13 @@ const TicketModel = require('../models/ticket');
 module.exports.create = async function (req, res, next) {
 
     try {
-        let ticket = new TicketModel({...req.body,createdBy: req.auth.id,status: 'New'});
+
+        const today = new Date(); 
+        const datePrefix = today.toISOString().slice(0, 10).replace(/-/g, '');
+        const count = await TicketModel.countDocuments();
+        const ticketNumber = `${datePrefix}-${String(count + 1).padStart(6, '0')}`;
+
+        let ticket = new TicketModel({...req.body, ticketNumber, createdBy: req.auth.id, status: 'New'});
 
         await ticket.save();
 
