@@ -4,6 +4,7 @@
     Description: Defines routes for user authentication (register, login, profile)
     Date: November 09 2025
 */
+
 var express = require('express');
 var router = express.Router();
 var authController = require('../controllers/auth');

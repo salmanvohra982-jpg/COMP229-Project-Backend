@@ -13,9 +13,10 @@ var configDb = require('./config/db');
 var dotenv = require('dotenv');
 dotenv.config();
 
-/*var userRouter = require("./app/routers/user");
+var userRouter = require("./app/routers/user");
 var ticketRouter = require('./app/routers/ticket');
-var authRouter = require('./app/routers/auth');*/
+var authRouter = require('./app/routers/auth');
+var indexRouter = require('./app/routers/index.js');
 
 var app = express();
 
@@ -26,14 +27,12 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
 
-// simple test route
-app.get("/api/status", (req, res) =>
-  res.json({ message: "Helpdesk backend up and running" })
-);
+// home route
+app.use('/', indexRouter);
 
-/*app.use('/auth', authRouter)
+app.use('/api/auth', authRouter)
 app.use('/api/users', userRouter);
-app.use('/api/ticket', ticketRouter);*/
+app.use('/api/tickets', ticketRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
