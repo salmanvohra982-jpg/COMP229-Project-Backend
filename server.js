@@ -13,12 +13,19 @@ var configDb = require('./config/db');
 var dotenv = require('dotenv');
 dotenv.config();
 
-/*var userRouter = require("./app/routers/user");
-var ticketRouter = require('./app/routers/ticket');
-var authRouter = require('./app/routers/auth');*/
+// ====== PORTFOLIO ROUTERS (your new models) ======
+var userRouter = require("./app/routers/user");
+var projectRouter = require("./app/routers/project");
+var serviceRouter = require("./app/routers/service");
+var contactRouter = require("./app/routers/contact");
+
+// ====== OLD HELP DESK ROUTERS (you can ignore or delete) ======
+// var ticketRouter = require('./app/routers/ticket');
+// var authRouter = require('./app/routers/auth');
 
 var app = express();
 
+// connect database
 configDb();
 
 app.use(logger('dev'));
@@ -31,29 +38,26 @@ app.get("/api/status", (req, res) =>
   res.json({ message: "Helpdesk backend up and running" })
 );
 
-/*app.use('/auth', authRouter)
+// ====== MOUNT PORTFOLIO ROUTES ======
 app.use('/api/users', userRouter);
-app.use('/api/ticket', ticketRouter);*/
+app.use('/api/projects', projectRouter);
+app.use('/api/services', serviceRouter);
+app.use('/api/contacts', contactRouter);
 
-// catch 404 and forward to error handler
+// ====== ERROR HANDLING ======
 app.use(function (req, res, next) {
   next(createError(404, 'Route not found'));
 });
 
-// error handler
 app.use(function(err, req, res, next) {
-     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-    res.status(err.status || 500);
-
-    res.json({
+    res.status(err.status || 500).json({
         success: false,
         message: err.message
     });
 });
-
 
 const PORT = process.env.PORT;
 
