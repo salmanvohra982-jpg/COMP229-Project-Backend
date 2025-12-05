@@ -18,6 +18,8 @@ var userRouter = require("./app/routers/user");
 var projectRouter = require("./app/routers/project");
 var serviceRouter = require("./app/routers/service");
 var contactRouter = require("./app/routers/contact");
+var authRouter = require('./app/routers/auth');
+
 
 // ====== OLD HELP DESK ROUTERS (you can ignore or delete) ======
 // var ticketRouter = require('./app/routers/ticket');
@@ -32,6 +34,7 @@ app.use(logger('dev'));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false}));
+app.use('/auth', authRouter);  
 
 // simple test route
 app.get("/api/status", (req, res) =>
